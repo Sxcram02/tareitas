@@ -12,11 +12,9 @@
 > eso sí, dándole una mayor funcionalidad e interacción con el usuario mediante el uso de
 > una interfaz web.
 
-# La Especificación de Requisitos Software (ERS) mínima es la siguiente:
+La Especificación de Requisitos Software (ERS) mínima es la siguiente:
+
 ## Requisitos Funcionales:
-
-<hr />
-
 * RF-1. Gestión de listas de tareas
   * RF-1.1. Crear una lista de tareas
   * RF-1.2. Editar el nombre de una lista
@@ -41,9 +39,6 @@
   * RF-3.4. Borrar una nota
   
 ## Requisitos No funcionales:
-
-<hr />
-
 ### RNF-1 Usabilidad
 1. RNF-1.1. La aplicación debe ser fácil de usar.
 2. RNF-1.2. Se contará con mensajes de ayuda y avisos de error.

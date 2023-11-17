@@ -21,18 +21,20 @@
 require_once 'funciones.inc.php';
 
 define("MAIN", "Location: /index.php");
-define("LISTAS","Location: /lista.php");
+define("LISTAS", "Location: /listas.php");
 
 define("ERROR0", "Location: /index.php?error=0");
 define("ERROR1", "Location: /index.php?error=1");
-define("ERROR2","Location: /index.php?error=2");
+define("ERROR2", "Location: /index.php?error=2");
 define("ERROR3", "Location: /index.php?error=3");
-define("ERROR4","Location: /index.php?error=4");
+define("ERROR4", "Location: /index.php?error=4");
 define("ERROR5", "Location: /index.php?error=5");
-define("ERROR6","Location: /index.php?error=6");
+define("ERROR6", "Location: /index.php?error=6");
 
 $contenidoJson = file_get_contents("json/tareas.json");
 $accion = $_GET['accion'] ?? null;
+$idLista = $_GET['idLista'] ?? null;
+
 $listaTareas = (
     file_exists("json/tareas.json") && !empty($contenidoJson)
 ) ? json_decode($contenidoJson, true)
@@ -44,4 +46,4 @@ $listaTareas = (
                 "nombreLista" => "Tareas no asignadas",
             )
         )
-    );
+);

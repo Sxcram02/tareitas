@@ -1,5 +1,6 @@
 <?php
 require_once 'src/funciones.inc.php';
+$title = "Listas";
 include_once 'assets/layouts/header.php';
 ?>
 <article>

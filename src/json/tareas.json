@@ -1,86 +1,26 @@
 {
-    "tareas": {
-        "0": {
-            "id": "1",
-            "descripcion": "Prueba 11",
+    "tareas": [
+        {
+            "id": 0,
+            "descripcion": "Prueba 1",
             "prioridad": "importante",
-            "fecha-limite": "2024-04-15",
-            "estado": "completado",
-            "id_lista": "1"
-        },
-        "1": {
-            "id": "1",
-            "descripcion": "Prueba 2",
-            "prioridad": "importante",
-            "fecha-limite": "2023-04-15",
-            "estado": "completado",
-            "id_lista": "1"
-        },
-        "2": {
-            "id": "2",
-            "descripcion": "Prueba 14",
-            "prioridad": "intermedio",
-            "fecha-limite": "2023-04-21",
-            "estado": "completado",
-            "id_lista": "1"
-        },
-        "3": {
-            "id": "3",
-            "descripcion": "Prueba 16",
-            "prioridad": "importante",
-            "fecha-limite": "2023-04-25",
-            "estado": "completado",
-            "id_lista": 0
-        },
-        "4": {
-            "id": 4,
-            "descripcion": "Prueba 27",
-            "prioridad": "intermedio",
-            "fecha-limite": "2023-04-25",
-            "estado": "completado",
-            "id_lista": "1"
-        },
-        "5": {
-            "id": 5,
-            "descripcion": "Prueba 2",
-            "prioridad": "importante",
-            "fecha-limite": "20023-04-25",
+            "fecha-limite": "2002-04-12",
             "estado": "no completado",
-            "id_lista": "1"
+            "id_lista": "0"
         },
-        "6": {
-            "id": 6,
-            "descripcion": "232422@|",
-            "prioridad": "no importante",
-            "fecha-limite": "2232-03-12",
+        {
+            "id": 1,
+            "descripcion": "!\"!\u00b7&\u00b7&!\u00b7&%$",
+            "prioridad": "importante",
+            "fecha-limite": "2002-04-12",
             "estado": "no completado",
-            "id_lista": 0
-        },
-        "7": {
-            "id": 7,
-            "descripcion": "12!\"#@",
-            "prioridad": "no importante",
-            "fecha-limite": "3121-02-12",
-            "estado": "no completado",
-            "id_lista": 0
-        },
-        "13": {
-            "id": 10,
-            "descripcion": "!",
-            "prioridad": "intermedio",
-            "fecha-limite": "2023-12-12",
-            "estado": "completado",
             "id_lista": "0"
         }
-    },
+    ],
     "lista": [
         {
             "id_lista": 0,
-            "nombreLista": "lista3"
-        },
-        {
-            "id_lista": 1,
-            "nombreLista": "Lista 5"
+            "nombreLista": "Sin asignar"
         }
     ]
 }

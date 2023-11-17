@@ -11,11 +11,12 @@
 function esInfoValida($informacion): ?string
 {
     $estaValidado = false;
-    $pattern="/[a-z0-9-_\s]+/i";
+    $pattern = "/^[!ªº\\\"·$%&()=?¿¡\/'|@#~€¬\´\`^\*\+\¨ç.:,;{}\[\]]+$/";
+    $expresion = preg_match($pattern, $informacion);
     if (
-        !empty($informacion) ||
+        !empty($informacion) &&
         isset($informacion) &&
-        !is_bool(preg_match($pattern, $informacion))
+        is_bool($expresion) == 0
     ) {
         $informacion = htmlspecialchars($informacion);
         $informacion = stripcslashes($informacion);
@@ -94,24 +95,25 @@ function mostrarTareas(string $filtro = "no completado"): void
  *
  * @return void
  */
-function mostrarListas(){
+function mostrarListas()
+{
     $contenidoJson = obtenerContenidoJson("src/json/tareas.json");
-    if(count($contenidoJson["lista"]) > 0) {
-    foreach ($contenidoJson['lista'] as $indiceLista => $lista) {
-        $tareasCompletadas = 0;
-        $tareasIncompletas = 0;
-        foreach($contenidoJson['tareas'] as $tareas){
-            if($tareas["id_lista"] == $indiceLista){
-                if($tareas['estado'] == "completado"){
-                    $tareasCompletadas = $tareasCompletadas + 1;
-                }else{
-                    $tareasIncompletas = $tareasIncompletas + 1;
+    if (count($contenidoJson["lista"]) > 0) {
+        foreach ($contenidoJson['lista'] as $indiceLista => $lista) {
+            $tareasCompletadas = 0;
+            $tareasIncompletas = 0;
+            foreach ($contenidoJson['tareas'] as $tareas) {
+                if ($tareas["id_lista"] == $lista['id_lista']) {
+                    if ($tareas['estado'] == "completado") {
+                        $tareasCompletadas = $tareasCompletadas + 1;
+                    } else {
+                        $tareasIncompletas = $tareasIncompletas + 1;
+                    }
                 }
             }
+            include 'assets/components/lista-de-tareas.php';
         }
-        include 'assets/components/lista-de-tareas.php';
+    } else {
+        require_once "assets/components/crear-lista.php";
     }
-}else{
-    require_once "assets/components/crear-lista.php";
-}
 }

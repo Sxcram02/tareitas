@@ -26,10 +26,22 @@
                         value="<?php echo $archivoJson['lista'][$idLista]['nombreLista']?>">
                 </p>
                 <p>
-                    <label for="eliminarTarea">¿Quieres eliminar alguna tarea?</label>
+                    <label for="tareasAniadidas">¿Quieres añadir alguna tarea?</label>
                     <?php
                         foreach($archivoJson['tareas'] as $tarea){
-                            if($tarea['id_lista'] == $idLista){
+                            if($tarea['id_lista'] == 0){
+                                echo '<label>
+                                <input type="checkbox" name="tareasAniadidas[]" value="' . $tarea['id'] . '"/>'
+                                . $tarea['descripcion']. '</label>';
+                            }
+                        }
+                    ?>
+                </p>
+                <p>
+                    <label for="tareasEliminadas">¿Quieres eliminar alguna tarea?</label>
+                    <?php
+                        foreach($archivoJson['tareas'] as $tarea){
+                            if($tarea['id_lista'] == $archivoJson['lista'][$idLista]['id_lista']){
                                 echo '<label>
                                 <input type="checkbox" name="tareasEliminadas[]" value="' . $tarea['id'] . '"/>'
                                 . $tarea['descripcion']. '</label>';

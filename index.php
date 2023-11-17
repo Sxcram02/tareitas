@@ -29,9 +29,11 @@
             <label for="fecha-creacion">
                 <input type="date" name="fecha-creacion" id="fecha-creacion">
             </label>
-            <label for="add-tarea">
-                <button type="submit" name="create-tarea" value="">
-                    <i class='bx bx-plus' styles="font-size:36px;"></i>
+            <label for="create-tarea">
+                <button name="create-tarea">
+                    <a href="src/tareitas.php?accion=crearTarea">
+                        <i class='bx bx-plus' styles="font-size:36px;"></i>
+                    </a>
                 </button>
             </label>
         </fieldset>

@@ -33,7 +33,6 @@
                     <label for="lista-de-tareas">Quieres asociar la tarea a una lista?</label>
                     <select name="lista-de-tareas" id="lista-de-tareas">
                         <?php
-                        $archivoJson = obtenerContenidoJson("json/tareas.json");
                         foreach($archivoJson['lista'] as $lista){
                             if($lista['id_lista'] == 0){
                                 echo '<option value="'. $lista['id_lista'] .'" selected>'.

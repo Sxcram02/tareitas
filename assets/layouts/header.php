@@ -8,7 +8,7 @@
     <!--  LINKS CSS Y LIBRERIAS DE ICONOS Y FUENTES-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="assets/styles/index.css">
-    <title>Home</title>
+    <title><?php echo $title ?></title>
 </head>
 
 <body>

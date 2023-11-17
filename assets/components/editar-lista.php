@@ -1,6 +1,4 @@
 <?php
-    require_once("funciones.inc.php");
-    $archivoJson = obtenerContenidoJson("json/tareas.json");
     $listasComprobadas = 0;
     
     foreach($archivoJson['lista'] as $lista){
@@ -12,7 +10,7 @@
         }
         
         if($listasComprobadas == count($archivoJson["lista"])){
-            header(MAIN."?error=6");
+            header("Location: " . MAIN."?error=6");
         }
     }
 ?>

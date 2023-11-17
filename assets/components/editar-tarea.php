@@ -1,6 +1,5 @@
 <?php
-    require_once("funciones.inc.php");
-    $archivoJson = obtenerContenidoJson("json/tareas.json");
+    require_once "funciones.inc.php";
     $tareasComprobadas = 0;
     
     foreach($archivoJson['tareas'] as $tareas){

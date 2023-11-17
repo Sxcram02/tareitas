@@ -1,4 +1,4 @@
-<?php include_once 'assets/layouts/header.php'; ?>
+<?php $title = "Home"; include_once 'assets/layouts/header.php'; ?>
 <!-- MAIN CONTENT -->
 <!--
     TAREAS PENDIENTES:
@@ -40,8 +40,8 @@
         <!-- VISUALIZACIÓN DE LAS TAREAS PENDIENTES Y REALIZADAS -->
         <?php
         if (!isset($_GET['accion']) && !isset($_GET['error'])) {
-            include_once("assets/components/tareas_pendientes.php");
-            include_once("assets/components/tareas_realizadas.php");
+            include_once 'assets/components/tareas_pendientes.php';
+            include_once 'assets/components/tareas_realizadas.php';
         }
 
         // POSIBLES ERRORES CON SU RESPECTIVO MENSAJE
@@ -56,9 +56,9 @@
                 default => "Algo salio mal...",
             };
 
-            include_once("assets/layouts/error.php");
+            include_once 'assets/layouts/error.php';
         }
         ?>
     </main>
 </form>
-<?php include_once("assets/layouts/footer.php"); ?>
+<?php include_once 'assets/layouts/footer.php'; ?>

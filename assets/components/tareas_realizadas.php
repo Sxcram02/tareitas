@@ -11,7 +11,7 @@
         <hr />
         <tbody>
             <?php
-                require_once("src/funciones.inc.php");
+                require_once "src/funciones.inc.php";
                 mostrarTareas("completado");
             ?>
         </tbody>

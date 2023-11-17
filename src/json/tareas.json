@@ -29,7 +29,7 @@
             "descripcion": "Prueba 16",
             "prioridad": "importante",
             "fecha-limite": "2023-04-25",
-            "estado": "no completado",
+            "estado": "completado",
             "id_lista": 0
         },
         "4": {
@@ -64,27 +64,23 @@
             "estado": "no completado",
             "id_lista": 0
         },
-        "9": {
-            "id": 9,
-            "descripcion": "lista3",
-            "prioridad": "importante",
-            "fecha-limite": "2024-01-12",
-            "estado": "completado",
-            "id_lista": "1"
-        },
         "13": {
             "id": 10,
-            "descripcion": "!\"\u00b7(\u00b7%&\/\"$Sdwd",
+            "descripcion": "!",
             "prioridad": "intermedio",
             "fecha-limite": "2023-12-12",
             "estado": "completado",
-            "id_lista": "1"
+            "id_lista": "0"
         }
     },
     "lista": [
         {
             "id_lista": 0,
-            "nombreLista": "lista1"
+            "nombreLista": "lista3"
+        },
+        {
+            "id_lista": 1,
+            "nombreLista": "Lista 5"
         }
     ]
 }

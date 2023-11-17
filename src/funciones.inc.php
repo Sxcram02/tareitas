@@ -17,6 +17,9 @@ function esInfoValida($informacion): ?string
         isset($informacion) &&
         !is_bool(preg_match($pattern, $informacion))
     ) {
+        $informacion = htmlspecialchars($informacion);
+        $informacion = stripcslashes($informacion);
+        $informacion = trim($informacion);
         $estaValidado = true;
     }
 
@@ -73,7 +76,7 @@ function mostrarTareas(string $filtro = "no completado"): void
     if (isset($contenidoJson) && count($contenidoJson['tareas']) > 0) {
         foreach ($contenidoJson['tareas'] as $indiceTarea => $tareas) {
             if (!is_bool(array_search($filtro, $tareas))) {
-                include("assets/components/tarea.php");
+                include 'assets/components/tarea.php';
             }
         }
     } else {
@@ -95,7 +98,6 @@ function mostrarListas(){
     $contenidoJson = obtenerContenidoJson("src/json/tareas.json");
     if(count($contenidoJson["lista"]) > 0) {
     foreach ($contenidoJson['lista'] as $indiceLista => $lista) {
-        
         $tareasCompletadas = 0;
         $tareasIncompletas = 0;
         foreach($contenidoJson['tareas'] as $tareas){
@@ -107,9 +109,9 @@ function mostrarListas(){
                 }
             }
         }
-        include("assets/components/lista-de-tareas.php");
+        include 'assets/components/lista-de-tareas.php';
     }
 }else{
-    require_once("assets/components/crear-lista.php");
+    require_once "assets/components/crear-lista.php";
 }
 }

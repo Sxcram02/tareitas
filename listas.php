@@ -1,6 +1,6 @@
 <?php
-require_once("src/funciones.inc.php");
-include_once("assets/layouts/header.php");
+require_once 'src/funciones.inc.php';
+include_once 'assets/layouts/header.php';
 ?>
 <article>
     <p>
@@ -11,4 +11,5 @@ include_once("assets/layouts/header.php");
 </article>
 <?php
 mostrarListas();
-include_once("assets/layouts/footer.php");
+include_once 'assets/layouts/footer.php';
+?>

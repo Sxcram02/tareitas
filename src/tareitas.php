@@ -1,52 +1,34 @@
 <?php
+require_once "config.inc.php";
+$title = "Tareitas";
 
-/**
- * !!! EJECUCCIÓN DEL SERVIDOR EN EL ARCHIVO INDEX.PHP CON TODA SU CARPETA
- * **POSIBLES ERRORES DE RUTAS RELATIVAS**
- *
- * Este el archivo php que controla las creaciones, ediciones,
- * eliminaciones y obtención de datos en el json.
- * Requiero de todas las funciones implementadas en el archivo funciones.inc.php
- *
- * @var string $contenidoJson
- * @var string $accion
- * @var array $listaTareas
- * @var int $tareacreadas
- *
- * @file src/json/tareas.json
- * @file src/funciones.inc.php
- * @author Marcos <228@cifpceuta.es>
- */
-
-require_once("funciones.inc.php");
-define("MAIN", "Location: ../index.php");
-define("ERROR2", MAIN . "?error=2");
-
-$contenidoJson = file_get_contents("json/tareas.json");
-$accion = $_GET['accion'] ?? null;
-$listaTareas = (
-    file_exists("json/tareas.json") && !empty($contenidoJson)
-) ? json_decode($contenidoJson, true)
-    : array(
-        'tareas' => array(),
-        'lista' => array(
-            array(
-                "id_lista" => 0,
-                "nombreLista" => "Tareas no asignadas",
-            )
-        )
-    );
-include_once("../assets/layouts/header.php");
+// PARA LOS DATOS RECIBIDOS MEDIANTE POST
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    foreach($_POST as $clave => $valor){
+        if(!is_array($valor)){
+            $datoAvalidar = esInfoValida($valor);
+            if(!isset($datoAvalidar)){
+                header(ERROR0);
+            }
+        }else{
+            foreach($valor as $indice => $contenido){
+                $datoAvalidar = esInfoValida($contenido);
+                if(!isset($datoAvalidar)){
+                    header(ERROR0);
+                }
+            }
+        }
+    }
+}
 
 // INPUT QUE CONTROLA LA CREACIÓN
 // DE TAREAS & DE LISTAS & DE NOTAS
 // MUESTRA EL FORMULARIO DE CREACIÓN
 if (isset($_POST["create-tarea"])) {
-    require_once("../assets/components/crear-tarea.php");
-}
-
-if (isset($_POST["create-list"])) {
-    require_once("../assets/components/crear-lista.php");
+    $archivoJson = $listaTareas;
+    $title = "Crear tarea";
+    include_once '../assets/layouts/header.php';
+    require_once "../assets/components/crear-tarea.php";
 }
 
 /**
@@ -57,7 +39,10 @@ if (isset($_POST["create-list"])) {
 
 switch ($accion) {
     case "crearLista":
-        include_once("../assets/components/crear-lista.php");
+        $archivoJson = $listaTareas;
+        $title = "Crear Lista";
+        include_once '../assets/layouts/header.php';
+        include_once '../assets/components/crear-lista.php';
         break;
     // ELIMINACION REFACTORIZAR EN UNA FUNCIÓN CON DOS PARAMETROS
     case "eliminarTarea":
@@ -71,25 +56,37 @@ switch ($accion) {
         break;
     case "eliminarLista":
         if (!empty($listaTareas['lista'][$_GET['idLista']])) {
+            foreach($listaTareas['tareas'] as $tareas){
+                if($_GET['id_lista'] == $tareas['id_lista']){
+                    unset($listaTareas['tareas'][$tareas['id']]);
+                }
+            }
+            
             unset($listaTareas['lista'][$_GET['idLista']]);
             actualizarArchivoJson($listaTareas);
             header(MAIN);
         } else {
-            header(MAIN."?error=6");
+            header(ERROR6);
         }
         break;
     case 'editarLista':
         $idLista = $_GET['idLista'] ?? null;
         if (isset($listaTareas["lista"][$_GET["idLista"]])) {
-            require_once("../assets/components/editar-lista.php");
+            $archivoJson = $listaTareas;
+            $title = "Editar Lista";
+            include_once '../assets/layouts/header.php';
+            require_once "../assets/components/editar-lista.php";
         } else {
-            header(MAIN."?error=6");
+            header(ERROR6);
         }
         break;
     case "editarTarea":
         $idTarea = $_GET['idListaTarea'] ?? null;
         if (isset($listaTareas["tareas"][$_GET["idListaTarea"]])) {
-            require_once("../assets/components/editar-tarea.php");
+            $archivoJson = $listaTareas;
+            $title = "Editar Tarea";
+            include_once '../assets/layouts/header.php';
+            require_once "../assets/components/editar-tarea.php";
         } else {
             header(ERROR2);
         }
@@ -100,7 +97,7 @@ switch ($accion) {
             ? "completado"
             : $listaTareas['tareas'][$_GET['idTarea']]['estado'];
         header((actualizarArchivoJson($listaTareas))
-        ? MAIN : MAIN . "?error=3");
+        ? MAIN : ERROR3);
         break;
     default:
         break;
@@ -116,12 +113,12 @@ if (isset($_POST["crear-info-tarea"])) {
     $idListaTareas = $_POST['lista-de-tareas'] ?? count($listaTareas['lista']);
 
     $tarea = [
-        "id" => count($listaTareas['tareas']),
-        "descripcion" => esInfoValida($_POST['descripcion']),
-        "prioridad" => esInfoValida($_POST['prioridad']),
-        "fecha-limite" => esInfoValida($_POST['fecha-limite']),
-        "estado" => esInfoValida($_POST['estado']),
-        "id_lista" => esInfoValida($idListaTareas) ?? 0,
+    /** int */    "id" => count($listaTareas['tareas']),
+    /** string */    "descripcion" => $_POST['descripcion'],
+    /** enum */    "prioridad" => $_POST['prioridad'],
+    /** date */    "fecha-limite" => $_POST['fecha-limite'],
+    /** enum */    "estado" => $_POST['estado'],
+    /** int */    "id_lista" => $idListaTareas ?? 0,
     ];
 
     foreach ($tarea as $clave => $valor) {
@@ -137,7 +134,7 @@ if (isset($_POST["crear-info-tarea"])) {
             header(MAIN);
         }
     } else {
-        header(MAIN . "?error=1");
+        header(ERROR1);
     }
 }
 
@@ -148,11 +145,11 @@ if (isset($_POST['change-info-tarea'])) {
         $tareas = $listaTareas['tareas'][$indiceTarea];
         if ($_GET['idTarea'] == $indiceTarea) {
 
-            $tareas['descripcion'] = esInfoValida($_POST['descripcion']) ?? $tareas['descripcion'];
-            $tareas['prioridad'] = esInfoValida($_POST['prioridad']) ?? $tareas['prioridad'];
-            $tareas['fecha-limite'] = esInfoValida($_POST['fecha-limite']) ?? $tareas['fecha-limite'];
-            $tareas['estado'] = esInfoValida($_POST['estado']) ?? $tareas['estado'];
-            $tareas['id_lista'] = esInfoValida($_POST['lista-de-tareas']) ?? $tareas['id_lista'];
+            $tareas['descripcion'] = $_POST['descripcion'] ?? $tareas['descripcion'];
+            $tareas['prioridad'] = $_POST['prioridad'] ?? $tareas['prioridad'];
+            $tareas['fecha-limite'] = $_POST['fecha-limite'] ?? $tareas['fecha-limite'];
+            $tareas['estado'] = $_POST['estado'] ?? $tareas['estado'];
+            $tareas['id_lista'] = $_POST['lista-de-tareas'] ?? $tareas['id_lista'];
 
             $listaTareas['tareas'][$indiceTarea] = $tareas;
             $estaActualizado = true;
@@ -162,7 +159,7 @@ if (isset($_POST['change-info-tarea'])) {
     if (actualizarArchivoJson($listaTareas) && $estaActualizado) {
         header(MAIN);
     } else {
-        header(MAIN . "?error=4");
+        header(ERROR4);
     }
 }
 
@@ -189,9 +186,9 @@ if (isset($_POST["crear-lista-de-tareas"])) {
             // AUN NADA
         }
         
-        header("Location: /listas.php");
+        header(LISTAS);
     } else {
-        header(MAIN . "?error=5");
+        header(ERROR5);
     }
 }
 
@@ -214,7 +211,7 @@ if(isset($_POST["change-info-lista"])) {
          *      )
          *  )
          */
-        $listaTareas['lista'][$_GET['idLista']]['nombreLista'] = esInfoValida($_POST['nombreLista'])
+        $listaTareas['lista'][$_GET['idLista']]['nombreLista'] = $_POST['nombreLista']
         ?? $listaTareas['lista'][$_GET['idLista']]['nombreLista'];
         
         if(
@@ -239,17 +236,17 @@ if(isset($_POST["change-info-lista"])) {
         }
         
     }else{
-        header(MAIN . "?error=6");
+        header(ERROR6);
     }
     
     
     if(actualizarArchivoJson($listaTareas) && $estaActualizado){
         header("Location: /listas.php");
     }else{
-        header(MAIN . "?error=0");
+        header(ERROR0);
     }
     
     
 }
 
-include_once("../assets/layouts/footer.php");
+include_once '../assets/layouts/footer.php';

@@ -18,7 +18,7 @@
 <article>
     <!-- PÁGINA DE EDICCIÓN DE TAREAS -->
     <section>
-        <form action="../../src/tareitas.php?idTarea=<?php echo $idTarea?>" method="post">
+        <form action="?idTarea=<?php echo $idTarea?>" method="post">
             <fieldset>
                 <legend>EDITAR TAREA</legend>
                 <p>
@@ -42,8 +42,8 @@
                 </p>
                 <p>
                     <label for="fecha-limite">Fecha Límite</label>
-                    <input type="date" name="fecha-limite"
-                        value="<?php echo $archivoJson['tareas'][$idTarea]['fecha-limite']?>">
+                    <input type="date" name="fecha-limite" max="2030-12-31" min="2023-01-01"
+                        value="<?php echo $archivoJson['tareas'][$idTarea]['fecha-limite'] ?>">
                 </p>
                 <p>
                     <label for="estadoActual">Estado actual: </label>

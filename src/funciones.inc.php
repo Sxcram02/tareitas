@@ -11,12 +11,10 @@
 function esInfoValida($informacion): ?string
 {
     $estaValidado = false;
-    $pattern = "/^[!ªº\\\"·$%&()=?¿¡\/'|@#~€¬\´\`^\*\+\¨ç.:,;{}\[\]]+$/";
-    $expresion = preg_match($pattern, $informacion);
+    (bool) $expresion = preg_match('/(\w\s?)+/', $informacion);
     if (
-        !empty($informacion) &&
-        isset($informacion) &&
-        is_bool($expresion) == 0
+        $expresion &&
+        !empty($informacion) || isset($informacion)
     ) {
         $informacion = htmlspecialchars($informacion);
         $informacion = stripcslashes($informacion);
@@ -115,5 +113,22 @@ function mostrarListas()
         }
     } else {
         require_once "assets/components/crear-lista.php";
+    }
+}
+
+function mostrarNotas(){
+    $contenidoJson = obtenerContenidoJson("src/json/tareas.json");
+    if (count($contenidoJson["nota"]) > 0) {
+        foreach ($contenidoJson['nota'] as $indiceNota => $nota) {
+            $nombreLista = "";
+            foreach($contenidoJson['lista'] as $indiceLista => $lista){
+                if($nota['id_lista'] == $lista['id_lista']){
+                    $nombreLista = $lista['nombreLista'];
+                }
+            }
+        include 'assets/components/nota.php';
+        }
+    } else {
+        require_once "assets/components/crear-nota.php";
     }
 }

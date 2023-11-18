@@ -1,7 +1,7 @@
 <article>
     <section>
         <!-- CREACIÓN DE LISTAS -->
-        <form action="../../src/tareitas.php" method="post">
+        <form action="#" method="post">
             <fieldset>
                 <legend>CREAR LISTA</legend>
                 <p>

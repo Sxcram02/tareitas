@@ -55,6 +55,8 @@
                 "4" => "La tarea no se ha podido EDITAR",
                 "5" => "Ya existe una lista con ese nombre",
                 "6" => "La lista introducida NO EXISTE",
+                "7" => "Ha surgido un error inseperado...",
+                "8" => "La nota introducida NO EXISTE...",
                 default => "Algo salio mal...",
             };
 

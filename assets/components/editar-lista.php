@@ -17,7 +17,7 @@
 <article>
     <!-- PÁGINA DE EDICCIÓN DE TAREAS -->
     <section>
-        <form action="../../src/tareitas.php?idLista=<?php echo $idLista?>" method="post">
+        <form action="?idLista=<?php echo $idLista?>" method="post">
             <fieldset>
                 <legend>EDITAR LISTA</legend>
                 <p>

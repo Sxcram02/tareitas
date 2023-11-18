@@ -1,7 +1,7 @@
 <article>
     <section>
         <!-- CREACIÓN DE TAREAS -->
-        <form action="../../src/tareitas.php" method="post">
+        <form action="#" method="post">
             <fieldset>
                 <legend>CREAR TAREA</legend>
                 <p>
@@ -20,7 +20,7 @@
                 </p>
                 <p>
                     <label for="fecha-limite">Fecha Límite</label>
-                    <input type="date" name="fecha-limite" required>
+                    <input type="date" name="fecha-limite" min="2023-01-01" max="2030-12-31" required>
                 </p>
                 <p>
                     <label for="estado">Estado:</label>

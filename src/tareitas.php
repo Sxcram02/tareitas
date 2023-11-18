@@ -4,22 +4,28 @@ $title = "Tareitas";
 
 // PARA LOS DATOS RECIBIDOS MEDIANTE POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $estaValidado = false;
     foreach ($_POST as $clave => $valor) {
         if (!is_array($valor)) {
             $datoAvalidar = esInfoValida($valor);
-            if (!isset($datoAvalidar)) {
-                header(ERROR0);
+            $estaValidado = (!isset($datoAvalidar)) ? false : true;
+            if (!$estaValidado) {
                 break;
             }
         } else {
             foreach ($valor as $indice => $contenido) {
                 $datoAvalidar = esInfoValida($contenido);
-                if (!isset($datoAvalidar)) {
-                    header(ERROR0);
+                $estaValidado = (!isset($datoAvalidar)) ? false : true;
+                if (!$estaValidado) {
                     break;
                 }
             }
         }
+    }
+
+    if (!$estaValidado) {
+        unset($_POST);
+        header(ERROR7);
     }
 }
 
@@ -30,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
  */
 
 switch ($accion) {
+    case "crearNota":
+        $archivoJson = $listaTareas;
+        $title = "Crear nota";
+        include_once '../assets/layouts/header.php';
+        require_once "../assets/components/crear-nota.php";
+        break;
     case "crearTarea":
         $archivoJson = $listaTareas;
         $title = "Crear tarea";
@@ -38,11 +50,19 @@ switch ($accion) {
         break;
     case "crearLista":
         $archivoJson = $listaTareas;
-        $title = "Crear Lista";
+        $title = "Crear lista";
         include_once '../assets/layouts/header.php';
-        include_once '../assets/components/crear-lista.php';
+        require_once '../assets/components/crear-lista.php';
         break;
-        // ELIMINACION REFACTORIZAR EN UNA FUNCIÓN CON DOS PARAMETROS
+    case "eliminarNota":
+        if (!empty($listaTareas['nota'][$_GET['idNota']])) {
+            unset($listaTareas['nota'][$_GET['idNota']]);
+            actualizarArchivoJson($listaTareas);
+            header(NOTAS);
+        } else {
+            header(ERROR8);
+        }
+        break;
     case "eliminarTarea":
         if (!empty($listaTareas['tareas'][$_GET['idTarea']])) {
             unset($listaTareas['tareas'][$_GET['idTarea']]);
@@ -62,19 +82,30 @@ switch ($accion) {
                     unset($listaTareas['tareas'][$indiceTarea]);
                 }
             }
-            
+
             unset($listaTareas['lista'][$_GET['idLista']]);
             actualizarArchivoJson($listaTareas);
-            header(MAIN);
+            header(LISTAS);
         } else {
             header(ERROR6);
+        }
+        break;
+    case "editarNota":
+        $idNota = $_GET['idNota'] ?? null;
+        if(isset($listaTareas['nota'][$idNota])){
+            $archivoJson = $listaTareas;
+            $title = "Editar nota";
+            include_once '../assets/layouts/header.php';
+            require_once "../assets/components/editar-nota.php";
+        }else{
+            header(ERROR8);
         }
         break;
     case 'editarLista':
         $idLista = $_GET['idLista'] ?? null;
         if (isset($listaTareas["lista"][$idLista])) {
             $archivoJson = $listaTareas;
-            $title = "Editar Lista";
+            $title = "Editar lista";
             include_once '../assets/layouts/header.php';
             require_once "../assets/components/editar-lista.php";
         } else {
@@ -85,7 +116,7 @@ switch ($accion) {
         $idTarea = $_GET['idListaTarea'] ?? null;
         if (isset($listaTareas["tareas"][$_GET["idListaTarea"]])) {
             $archivoJson = $listaTareas;
-            $title = "Editar Tarea";
+            $title = "Editar tarea";
             include_once '../assets/layouts/header.php';
             require_once "../assets/components/editar-tarea.php";
         } else {
@@ -111,7 +142,7 @@ switch ($accion) {
 if (isset($_POST["crear-info-tarea"]) && !isset($_GET['error'])) {
     $contieneInformacion = true;
 
-    $idListaTareas = $_POST['lista-de-tareas'] ?? "0";
+    $idListaTareas = $_POST['lista-de-tareas'] ?? 0;
 
     $tarea = [
         /** int */
@@ -121,7 +152,7 @@ if (isset($_POST["crear-info-tarea"]) && !isset($_GET['error'])) {
         /** enum */
         "prioridad" => $_POST['prioridad'],
         /** date */
-        "fecha-limite" => $_POST['fecha-limite'],
+        "fecha-limite" => date('d-m-Y',strtotime($_POST['fecha-limite'])),
         /** enum */
         "estado" => $_POST['estado'],
         /** int */
@@ -129,7 +160,7 @@ if (isset($_POST["crear-info-tarea"]) && !isset($_GET['error'])) {
     ];
 
     foreach ($tarea as $clave => $valor) {
-        if(!isset($valor)){
+        if (!isset($valor)) {
             $contieneInformacion = false;
         }
     }
@@ -210,7 +241,7 @@ if (isset($_POST["change-info-lista"]) && !isset($_GET['error'])) {
          *          "nombreLista": <valor>,
          *          "id_lista": <valor>
          *          )
-         * *      array(
+         *      array(
          *          "nombreLista": <valor2>,
          *          "id_lista": <valor2>
          *          )
@@ -235,9 +266,9 @@ if (isset($_POST["change-info-lista"]) && !isset($_GET['error'])) {
         ) {
             $estaActualizado = false;
             foreach ($listaTareas['tareas'] as $indiceTarea => $tareas) {
-                foreach($_POST['tareasAniadidas'] as $valor){
-                    if($valor == $tareas['id']){
-                        $listaTareas['tareas'][$valor]["id_lista"] = $_GET['idLista'];
+                foreach ($_POST['tareasAniadidas'] as $valor) {
+                    if ($valor == $tareas['id']) {
+                        $listaTareas['tareas'][$indiceTarea]["id_lista"] = $_GET['idLista'];
                         $estaActualizado = true;
                     }
                 }
@@ -266,7 +297,64 @@ if (isset($_POST["change-info-lista"]) && !isset($_GET['error'])) {
     if (actualizarArchivoJson($listaTareas) && $estaActualizado) {
         header("Location: /listas.php");
     } else {
-        header(ERROR0);
+        header(ERROR7);
+    }
+}
+
+//_-------------------------------------------------------------------//
+//_--------------------------- NOTAS ----------------------------------//
+//_-------------------------------------------------------------------//
+// BLOQUE DE CÓDIGO QUE CONTROLA LA CREACIÓN DE UNA NOTA
+if(isset($_POST['crear-info-nota'])){
+    $contieneInformacion = false;
+    
+    $nota = [
+        "id" => count($listaTareas['nota']),
+        "titulo" => $_POST['contenido-nota'] ?? "nota anónima",
+        "descripcion" => $_POST['contenido-nota'] ?? "Sin contenido",
+        "color_nota" => $_POST['color-nota'] ?? "yellow",
+        "id_lista" => (isset($_POST['lista-asociada'])) ? $_POST['lista-asociada'] : "sin lista"
+    ];
+
+    foreach ($nota as $clave => $valor) {
+        $contieneInformacion = (isset($valor)) ? true : false;
+    }
+    if ($contieneInformacion) {
+        array_push($listaTareas['nota'], $nota);
+        if (actualizarArchivoJson($listaTareas)) {
+            header(NOTAS);
+        }
+    } else {
+        header(ERROR1);
+    }
+}
+
+
+// BLOQUE DE CÓDIGO QUE CONTROLA LA EDICIÓN Y ACTUALIZACIÓN DE NOTAS
+if(isset($_POST['change-info-nota'])){
+    $idNota = $_GET['idNota'] ?? null;
+    $estaActualizado = false;
+    if(count($listaTareas['nota'][$idNota]) > 0){
+        foreach($listaTareas['nota'] as $indiceNota => $nota){
+            if($idNota == $indiceNota){
+                $nota['titulo-nota'] = $_POST['titulo-nota'] ?? $nota['titulo-nota'];
+                $nota['color_nota'] = $_POST['color-nota'] ?? $nota['color_nota'];
+                $nota['descripcion'] = $_POST['contenido-nota'] ?? $nota['descripcion'];
+                $nota['id_lista'] = $_POST['lista-asociada'] ?? $nota['id_lista'];
+                $estaActualizado = true;
+                $listaTareas['nota'][$idNota] = $nota;
+            }
+        }
+        
+        if($estaActualizado){
+            actualizarArchivoJson($listaTareas);
+            header(NOTAS);
+        }else{
+            header(ERROR7);
+        }
+        
+    }else{
+        header(ERROR8);
     }
 }
 

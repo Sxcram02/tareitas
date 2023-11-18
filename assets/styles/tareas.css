@@ -83,7 +83,8 @@ tbody tr:hover td, tbody tr:hover {
 }
 
 tbody td > input[type="date"] {
-    width: 200px;
+    width: 150px;
+    padding: 1%;
 }
 
 .fila-acciones button {
@@ -108,4 +109,8 @@ tbody td > input[type="date"] {
 
 .fila-acciones button:nth-child(3):hover {
     background-color: var(--xanthous);
+}
+
+.fila-acciones button:nth-child(4):hover {
+    background-color: var(--glaucous-oscuro);
 }

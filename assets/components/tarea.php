@@ -39,9 +39,14 @@
                     <?php echo $volverAtras ?>
                 </a>
             </button>
-            <button type=" submit">
+            <button>
                 <a href="src/tareitas.php?accion=editarTarea&idListaTarea=<?php echo $idTarea?>">
                     <i class="bx bx-search-alt-2"></i>
+                </a>
+            </button>
+            <button>
+                <a href="src/tareitas.php?accion=crearNota">
+                    <i class='bx bx-note'></i>
                 </a>
             </button>
         </div>

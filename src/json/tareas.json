@@ -1,13 +1,5 @@
 {
     "tareas": {
-        "0": {
-            "id": 0,
-            "descripcion": "Prueba 1",
-            "prioridad": "intermedio",
-            "fecha-limite": "2002-04-12",
-            "estado": "no completado",
-            "id_lista": "3"
-        },
         "2": {
             "id": 2,
             "descripcion": "hola",
@@ -22,7 +14,31 @@
             "prioridad": "intermedio",
             "fecha-limite": "2023-04-12",
             "estado": "no completado",
-            "id_lista": 0
+            "id_lista": "0"
+        },
+        "4": {
+            "id": 3,
+            "descripcion": "Tarea 12",
+            "prioridad": "importante",
+            "fecha-limite": "2025-12-12",
+            "estado": "no completado",
+            "id_lista": "2"
+        },
+        "5": {
+            "id": 4,
+            "descripcion": "Tarea 13",
+            "prioridad": "intermedio",
+            "fecha-limite": "2023-01-12",
+            "estado": "completado",
+            "id_lista": "3"
+        },
+        "6": {
+            "id": 5,
+            "descripcion": "Nueva Tarea",
+            "prioridad": "muy importante",
+            "fecha-limite": "2024-03-12",
+            "estado": "no completado",
+            "id_lista": "2"
         }
     },
     "lista": {
@@ -66,6 +82,13 @@
             "titulo-nota": "TITULO 6",
             "descripcion": "",
             "color_nota": "blue",
+            "id_lista": ""
+        },
+        {
+            "id": 4,
+            "titulo-nota": "cgfxcfxgfdgguighfgffjhgkjhjhfytseradsygfjhguhhgxfdgffyuyf",
+            "descripcion": "cgfxcfxgfdgguighfgffjhgkjhjhfytseradsygfjhguhhgxfdgffyuyf",
+            "color_nota": "red",
             "id_lista": ""
         }
     ]

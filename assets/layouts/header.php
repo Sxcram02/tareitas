@@ -7,7 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--  LINKS CSS Y LIBRERIAS DE ICONOS Y FUENTES-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="assets/styles/index.css">
+    <link rel="stylesheet" href="/assets/styles/index.css">
+    <link rel="stylesheet" href="/assets/styles/app.css">
+    <link rel="stylesheet" href="/assets/styles/tareas.css">
+    <link rel="stylesheet" href="/assets/styles/editar-tarea.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
     <title><?php echo $title ?></title>
 </head>
 
@@ -15,12 +19,11 @@
     <!--  HEADER COMÚN A TODAS LAS VISTAS -->
     <header>
         <div class="box-content">
-            <img src="" alt="" srcset="">
-            <h3>Tareitas</h3>
+            <img src="/assets/images/logo.png" alt="logo">
         </div>
         <ul>
-            <li><a href="/index.php">Tareas</a></li>
-            <li><a href="/listas.php">Listas</a></li>
-            <li><a href="/notas.php">Notas</a></li>
+            <li><i class='bx bxs-edit'></i><a href="/index.php">Tareas</a></li>
+            <li><i class='bx bx-list-ul'></i><a href="/listas.php">Listas</a></li>
+            <li><i class='bx bx-notepad'></i><a href="/notas.php">Notas</a></li>
         </ul>
     </header>

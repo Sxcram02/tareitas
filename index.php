@@ -10,33 +10,31 @@
 -->
 <form action="src/tareitas.php" method="post">
     <!-- NAVBAR DE NAVEGACIÓN ENTRE TAREAS -->
-    <nav>
-        <fieldset>
-            <legend></legend>
-            <label for="buscador-tarea">
-                <input type="search" name="buscador-tarea" id="buscador-tarea">
-            </label>
-            <label for="ordenar-desc">
-                <button type="submit" value="" name="ordenar-desc">
-                    <i class='bx bxs-down-arrow' styles="font-size:36px;"></i>
-                </button>
-            </label>
-            <label for="ordenar-asc">
-                <button type="submit" value="" name="ordenar-asc">
-                    <i class='bx bxs-up-arrow' styles="font-size:36px;"></i>
-                </button>
-            </label>
-            <label for="fecha-creacion">
-                <input type="date" name="fecha-creacion" id="fecha-creacion">
-            </label>
-            <label for="create-tarea">
-                <button name="create-tarea">
-                    <a href="src/tareitas.php?accion=crearTarea">
-                        <i class='bx bx-plus' styles="font-size:36px;"></i>
-                    </a>
-                </button>
-            </label>
-        </fieldset>
+    <nav class="nav-bar">
+        <label for="create-tarea">
+            <button name="create-tarea">
+                <a href="src/tareitas.php?accion=crearTarea">
+                    <p>Añadir tarea</p>
+                    <i class='bx bx-plus' styles="font-size:36px;"></i>
+                </a>
+            </button>
+        </label>
+        <label for="buscador-tarea">
+            <input type="search" name="buscador-tarea" id="buscador-tarea">
+        </label>
+        <label for="ordenar-desc">
+            <button type="submit" value="" name="ordenar-desc">
+                <i class='bx bxs-down-arrow' styles="font-size:36px;"></i>
+            </button>
+        </label>
+        <label for="ordenar-asc">
+            <button type="submit" value="" name="ordenar-asc">
+                <i class='bx bxs-up-arrow' styles="font-size:36px;"></i>
+            </button>
+        </label>
+        <label for="fecha-creacion">
+            <input type="date" name="fecha-creacion" id="fecha-creacion" min="2023-01-01" max="2050-12-31">
+        </label>
     </nav>
     <main>
         <!-- VISUALIZACIÓN DE LAS TAREAS PENDIENTES Y REALIZADAS -->

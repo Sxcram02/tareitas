@@ -131,6 +131,14 @@ switch ($accion) {
         header((actualizarArchivoJson($listaTareas))
             ? MAIN : ERROR3);
         break;
+        case "descompletarTarea":
+            $listaTareas['tareas'][$_GET['idTarea']]['estado'] =
+                (isset($listaTareas['tareas'][$_GET['idTarea']]))
+                ? "no completado"
+                : $listaTareas['tareas'][$_GET['idTarea']]['estado'];
+            header((actualizarArchivoJson($listaTareas))
+                ? MAIN : ERROR3);
+            break;
     default:
         break;
 }
@@ -152,7 +160,7 @@ if (isset($_POST["crear-info-tarea"]) && !isset($_GET['error'])) {
         /** enum */
         "prioridad" => $_POST['prioridad'],
         /** date */
-        "fecha-limite" => date('d-m-Y',strtotime($_POST['fecha-limite'])),
+        "fecha-limite" => $_POST['fecha-limite'],
         /** enum */
         "estado" => $_POST['estado'],
         /** int */
@@ -310,7 +318,7 @@ if(isset($_POST['crear-info-nota'])){
     
     $nota = [
         "id" => count($listaTareas['nota']),
-        "titulo" => $_POST['contenido-nota'] ?? "nota anónima",
+        "titulo-nota" => $_POST['contenido-nota'] ?? "nota anónima",
         "descripcion" => $_POST['contenido-nota'] ?? "Sin contenido",
         "color_nota" => $_POST['color-nota'] ?? "yellow",
         "id_lista" => (isset($_POST['lista-asociada'])) ? $_POST['lista-asociada'] : "sin lista"

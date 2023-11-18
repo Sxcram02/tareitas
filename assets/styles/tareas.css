@@ -1,0 +1,111 @@
+.tabla-tareas {
+    width: 100%;
+    height: 50%;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+table {
+    width: 90%;
+    height: 90%;
+    padding: 3%;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px var(--glaucous-oscuro);
+}
+
+caption, thead, tbody,hr {
+    margin: 0% 0% 1% 0%;
+}
+
+caption {
+    display: none;
+}
+
+thead {
+    height: 5%;
+    color: var(--zaffre);
+    text-transform: uppercase;
+    margin-bottom: 2%;
+}
+
+tbody {
+    height: 90%;
+}
+
+hr {
+    width: 50%;
+    height: 3px;
+    background-color: var(--xanthous);
+    border: none;
+}
+
+tbody tr td, tbody tr {
+    border: none;
+    text-align: center;
+}
+
+.bx {
+    font-size: 16pt;
+}
+
+.bx-task {
+    color: green;
+}
+
+.bx-task-x {
+    color: red;
+}
+
+.muy-importante {
+    color: red;
+}
+
+.importante {
+    color: var(--zaffre);
+}
+
+.intermedio {
+    color:green;
+}
+
+tbody td:nth-child(5) {
+    border: none;
+    cursor: pointer;
+}
+
+tbody tr:hover td, tbody tr:hover {
+    color: var(--xanthous);
+}
+
+tbody td > input[type="date"] {
+    width: 200px;
+}
+
+.fila-acciones button {
+    width: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--glaucous);
+    cursor: pointer;
+}
+
+.fila-acciones button:hover {
+    transition: 0.3s linear;
+    color: var(--licorize);
+}
+.fila-acciones button:nth-child(1):hover{
+    background-color: red;
+}
+
+.fila-acciones button:nth-child(2):hover{
+    background-color: green;
+}
+
+.fila-acciones button:nth-child(3):hover {
+    background-color: var(--xanthous);
+}

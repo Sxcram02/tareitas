@@ -15,7 +15,7 @@
         }
     }
 ?>
-<article>
+<article class="crud-editar">
     <!-- PÁGINA DE EDICCIÓN DE TAREAS -->
     <section>
         <form action="?idTarea=<?php echo $idTarea?>" method="post">

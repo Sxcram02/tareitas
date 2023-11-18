@@ -1,0 +1,109 @@
+:root {
+    --licorize:#0D0106;
+    --zaffre: #3626A7;
+    --glaucous:#657ED4;
+    --vainilla: #F5EE9E;
+    --glaucous-oscuro:#547AA5;
+    --xanthous: #F8B132;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Lexend',sans-serif;
+}
+
+h1,h2,h3,h4 {
+    width: 100%;
+    height: 2rem;
+    margin: 2%;
+    text-align: center;
+    font-family: 'Bree Serif';
+    font-size: 24pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: 2px 2px 0px black;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+img {
+    width: 100px;
+}
+
+header {
+    width: 100%;
+    height: 5rem;
+    padding: 1%;
+    color: white;
+    background-color: var(--licorize);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box-content {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.box-content img {
+    width: 150px;
+}
+
+header ul {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 18pt;
+}
+header ul li {
+    margin: 0% 10% 0% 0%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+header ul a:active, a:visited, a:link {
+    color: white;
+}
+
+header ul li i {
+    font-size: 18pt;
+}
+
+header ul li:hover a, header ul li:hover i{
+    transition: 0.2s linear;
+    color: var(--xanthous);
+}
+
+footer {
+    background-color: var(--licorize);
+    width: 100%;
+    height: 20%;
+    color: white;
+}
+
+@font-face {
+    font-family: 'Lexend';
+    src: url("../font/Lexend/Lexend-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Bree Serif';
+    src: url("../font/Bree-Serif/BreeSerif-Regular.ttf") format("truetype");
+}
+
+@import url("app.css");
+@import url("tareas.css");
+@import url("editar-tarea.css");

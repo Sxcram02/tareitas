@@ -1,5 +1,5 @@
 <?php require_once("src/funciones.inc.php"); ?>
-<article>
+<article class="tabla-tareas">
     <!-- TASK LIST INCOMPLETE -->
     <h1>Pendientes</h1>
     <table>
@@ -8,8 +8,9 @@
         <thead>
             <th></th>
             <th>Id</th>
-            <th>Descripción</th>
-            <th>Fecha Limite</th>
+            <th>Título</th>
+            <th>Prioridad</th>
+            <th>Fecha Fin</th>
             <th>Acciones</th>
         </thead>
         <hr />

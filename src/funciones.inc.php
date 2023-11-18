@@ -71,10 +71,15 @@ function obtenerContenidoJson(string $archivoJson): ?array
 function mostrarTareas(string $filtro = "no completado"): void
 {
     $contenidoJson = obtenerContenidoJson("src/json/tareas.json");
-    $estaChecked = ($filtro == "completado") ? "checked" : "";
+    $estaChecked = ($filtro == "completado")? "<i class='bx bx-task' ></i>": "<i class='bx bx-task-x' ></i>";
+    $volverAtras = ($filtro == "completado") ? "<i class='bx bx-arrow-back' ></i>": '<i class=" bx bx-check"></i>';
     if (isset($contenidoJson) && count($contenidoJson['tareas']) > 0) {
         foreach ($contenidoJson['tareas'] as $indiceTarea => $tareas) {
             if (!is_bool(array_search($filtro, $tareas))) {
+                $enlaceAccion = ($filtro == "completado")
+                ?"src/tareitas.php?accion=descompletarTarea&idTarea=$indiceTarea"
+                :"src/tareitas.php?accion=completarTarea&idTarea=$indiceTarea";
+                
                 include 'assets/components/tarea.php';
             }
         }

@@ -1,4 +1,4 @@
-<article>
+<article class="crud">
     <section>
         <!-- CREACIÓN DE TAREAS -->
         <form action="#" method="post">
@@ -6,17 +6,17 @@
                 <legend>CREAR TAREA</legend>
                 <p>
                     <label for="descripcion">Descripción: </label>
-                    <input type="text" name="descripcion" required>
+                    <input type="text" name="descripcion" required maxlength="20">
                 </p>
                 <p>
                     <label for="prioridad">Prioridad: </label>
-                    <label for="prioridad">No importante:
-                        <input type="radio" name="prioridad" value="no importante" checked>
-                    </label>
-                    <label for="prioridad">Intermedio: <input type="radio" name="prioridad" value="intermedio"></label>
-                    <label for="prioridad">Importante: <input type="radio" name="prioridad" value="importante"></label>
-                    <label for="prioridad">Muy importante: <input type="radio" name="prioridad"
-                            value="muy importante"></label>
+                    <select name="prioridad">
+                        <option value="" hidden selected></option>
+                        <option value="muy importante">Muy importante</option>
+                        <option value="importante">Importante</option>
+                        <option value="intermedio">Normal</option>
+                        <option value="no importante">Secundario</option>
+                    </select>
                 </p>
                 <p>
                     <label for="fecha-limite">Fecha Límite</label>
@@ -46,10 +46,13 @@
                 </p>
                 <p>
                     <label for="crear-info-tarea">
-                        <input type="submit" value="Crear Tarea" name="crear-info-tarea">
+                        <button type="submit" value="Crear Tarea" name="crear-info-tarea">Crear Tarea</button>
                     </label>
                 </p>
             </fieldset>
+            <div class="tareitas-logo-container">
+                <img src="/assets/images/icon-footer.png" alt="logo" class="tareitas-logo">
+            </div>
         </form>
     </section>
 </article>

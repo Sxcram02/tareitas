@@ -1,4 +1,4 @@
-<article style="background-color: <?php echo $nota['color_nota'] ?>;">
+<article class="notas" style="background-color: <?php echo $nota['color_nota'] ?>;">
     <section>
         <h1><?php echo $nota['titulo-nota'] ?></h1>
         <h3><?php echo $nombreLista ?></h3>

@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="/assets/styles/index.css">
     <link rel="stylesheet" href="/assets/styles/app.css">
     <link rel="stylesheet" href="/assets/styles/tareas.css">
-    <link rel="stylesheet" href="/assets/styles/editar-tarea.css">
+    <link rel="stylesheet" href="/assets/styles/crud.css">
+    <link rel="stylesheet" href="/assets/styles/listas.css">
+    <link rel="stylesheet" href="/assets/styles/notas.css">
+    <link rel="stylesheet" href="/assets/styles/error.css">
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
     <title><?php echo $title ?></title>
 </head>

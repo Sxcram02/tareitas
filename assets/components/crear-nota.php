@@ -1,4 +1,4 @@
-<article>
+<article class="crud">
     <section>
         <!-- CREACIÓN DE NOTAS -->
         <form action="#" method="post">
@@ -6,7 +6,7 @@
                 <legend>Crear nota</legend>
                 <p>
                     <label for="titulo-nota">Titulo de la nota</label>
-                    <input type="text" name="titulo-nota" required>
+                    <input type="text" name="titulo-nota" required maxlength="20">
                 </p>
                 <p>
                     <label for="color-nota">Selecciona un color</label>
@@ -25,18 +25,21 @@
                     <select name="lista-asociada" id="lista-asociada">
                         <option value="" hidden selected>--Seleciona lista--</option>
                         <?php
-                        foreach($archivoJson['lista'] as $lista){
-                            echo '<option value="'. $lista['id_lista'] .'">'.$lista['nombreLista'] .'</option>';
+                        foreach ($archivoJson['lista'] as $lista) {
+                            echo '<option value="' . $lista['id_lista'] . '">' . $lista['nombreLista'] . '</option>';
                         }
-                    ?>
+                        ?>
                     </select>
                 </p>
                 <p>
                     <label for="crear-info-nota">
-                        <input type="submit" value="Crear nota" name="crear-info-nota">
+                        <button type="submit" value="Crear nota" name="crear-info-nota">Crear nota</button>
                     </label>
                 </p>
             </fieldset>
+            <div class="tareitas-logo-container">
+                <img src="/assets/images/icon-footer.png" alt="logo" class="tareitas-logo">
+            </div>
         </form>
     </section>
 </article>

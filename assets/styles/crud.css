@@ -1,0 +1,156 @@
+.crud {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crud section {
+    width: 100%;
+    height: 100%;
+}
+
+.crud section form {
+    width: 100%;
+    height: 100%;
+    padding: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+}
+.crud section form fieldset {
+    width: 50%;
+    height: 90%;
+    padding: 5%;
+    background-color: var(--licorize);
+    border: none;
+    border-radius: 5px;
+    color: var(--xanthous);
+    box-shadow: 2px 2px 0px 1px white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tareitas-logo-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tareitas-logo {
+    width: 50%;
+    height: 50%;
+}
+
+.crud section form fieldset p {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.crud section form fieldset p:nth-last-child(1) {
+    align-items: center;
+    justify-content: center;
+}
+
+.crud section form fieldset p > label {
+    width: 40%;
+    font-weight: bold;
+}
+
+.crud fieldset select {
+    width: 40%;
+    padding: 2%;
+    background-color: var(--glaucous);
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.crud fieldset select:hover {
+    transition: 5ms linear;
+    color: black;
+    background-color: var(--xanthous);
+}
+
+.crud fieldset input {
+    width: 40%;
+    padding: 2%;
+    border: none;
+    border-radius: 5px;
+    background-color: #657fd458;
+    cursor: text;
+    color: white;
+}
+
+.crud fieldset input:hover {
+    transition: 2ms linear;
+    background-color: var(--xanthous);
+    color: black;
+}
+
+.crud textarea {
+    width: 40%;
+    height: 50%;
+}
+
+.crud section form fieldset button {
+    width: 90%;
+    height: 35px;
+    padding: 2%;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: var(--glaucous);
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.crud section form fieldset button:hover {
+    transition: 2ms linear;
+    color: black;
+    background-color: var(--xanthous);
+}
+
+.tareas-editar {
+    height: 85%;
+}
+
+.listas-editar {
+    height: 70%;
+}
+
+@media screen and (max-width: 650px) {
+    p {
+        font-size: 12px;
+    }
+
+    label{
+        font-size: 12px;
+    }
+
+    .crud section form {
+        padding: 1%;
+        flex-direction: column-reverse;
+    }
+
+    .tareitas-logo-container {
+        width: 70%;
+        height: 50%;
+    }
+
+
+    .crud section form fieldset {
+        width: 90%;
+        height: 90%;
+        padding: 5%;
+    }
+}

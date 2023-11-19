@@ -2,11 +2,12 @@
 <!-- MAIN CONTENT -->
 <!--
     TAREAS PENDIENTES:
-    1. CRUD NOTAS.
+    1. RF 3.2 DE USABILIDAD E INTERACCIÓON
     2. ARREGLAR EXPRESIONES REGULARES.
     3. NO PERMITIR ESPACIOS VACÍOS.
-    4. REFACTORIZAR CRUD DE LISTAS Y TAREAS.
-    5. AÑADIR ESTILOS FUENTE E IMAGENES.
+    4. REFACTORIZAR CRUD.
+    5. Estilos tarjetas de notas
+    6. input radio del color
 -->
 <form action="src/tareitas.php" method="post">
     <!-- NAVBAR DE NAVEGACIÓN ENTRE TAREAS -->
@@ -56,6 +57,13 @@
                 "7" => "Ha surgido un error inseperado...",
                 "8" => "La nota introducida NO EXISTE...",
                 default => "Algo salio mal...",
+            };
+
+            $imagenError = match($_GET['error']){
+                "6","8","2" => "/assets/images/error-404.png",
+                "1","5" => "/assets/images/error-403.png",
+                "3","7" => "/assets/images/error-500.png",
+                default => "/assets/images/error-comun.png"
             };
 
             include_once 'assets/layouts/error.php';

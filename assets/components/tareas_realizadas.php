@@ -1,5 +1,5 @@
 <article class="tabla-tareas">
-    <h1>Realizadas</h1>
+    <h1>Tareas Realizadas</h1>
     <table>
         <caption>Tabla con todas las tareas realizadas</caption>
         <thead>

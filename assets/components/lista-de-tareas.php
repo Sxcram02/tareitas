@@ -5,7 +5,7 @@
     $tareasNoRealizadas = $tareasIncompletas ?? null;
 ?>
 <!-- COMPONENTE LISTA -->
-<article>
+<article class="listas">
     <section>
         <div>
             <h1><?php echo $nombreLista ?></h1>
@@ -25,11 +25,13 @@
         <p>
             <button>
                 <a href="src/tareitas.php?accion=eliminarLista&idLista=<?php echo $idLista ?>">
+                    <p>Eliminar</p>
                     <i class="bx bx-x"></i>
                 </a>
             </button>
             <button>
                 <a href="src/tareitas.php?accion=editarLista&idLista=<?php echo $idLista ?>">
+                    <p>Editar</p>
                     <i class="bx bx-check"></i>
                 </a>
             </button>

@@ -62,6 +62,7 @@ function obtenerContenidoJson(string $archivoJson): ?array
     return (is_array($json) && !empty($json)) ? $json : null;
 }
 
+
 /**
  * mostrarTareas
  *

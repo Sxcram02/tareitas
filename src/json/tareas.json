@@ -5,7 +5,7 @@
             "descripcion": "hola",
             "prioridad": "no importante",
             "fecha-limite": "2002-04-12",
-            "estado": "completado",
+            "estado": "no completado",
             "id_lista": "2"
         },
         "3": {
@@ -57,29 +57,37 @@
         "4": {
             "id_lista": 3,
             "nombreLista": "lista 2"
+        },
+        "5": {
+            "id_lista": 4,
+            "nombreLista": "LISTA"
+        },
+        "6": {
+            "id_lista": 5,
+            "nombreLista": "LOCO"
         }
     },
     "nota": {
         "0": {
             "id": 4,
             "titulo-nota": "lfnweiusbfibsdvibsij",
-            "descripcion": "lfnweiusbfibsdvibsij",
-            "color_nota": "red",
-            "id_lista": ""
+            "descripcion": "alomejorno",
+            "color_nota": "yellow",
+            "id_lista": "2"
         },
         "2": {
             "id": 2,
             "titulo-nota": "TITULO 5",
-            "descripcion": "",
-            "color_nota": "orange",
-            "id_lista": ""
+            "descripcion": "gerudfgehrsgdfiuwgsuic",
+            "color_nota": "darkgreen",
+            "id_lista": "5"
         },
         "3": {
             "id": 3,
             "titulo-nota": "TITULO 6",
-            "descripcion": "",
+            "descripcion": "puedeser",
             "color_nota": "blue",
-            "id_lista": ""
+            "id_lista": "2"
         }
     }
 }

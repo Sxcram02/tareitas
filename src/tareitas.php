@@ -54,6 +54,32 @@ switch ($accion) {
         include_once '../assets/layouts/header.php';
         require_once '../assets/components/crear-lista.php';
         break;
+
+    case "verLista":
+        $idLista = $_GET['idLista'] ?? null;
+        $lista = $listaTareas['lista'][$idLista] ?? null;
+        if (!isset($lista)) {
+            header(ERROR6);
+        }
+        $tareas = array_filter(
+            $listaTareas['tareas'],
+            function ($valor) use ($idLista) {
+                return $valor['id_lista'] == $idLista;
+            }
+        );
+
+        $nota = array_filter(
+            $listaTareas['nota'],
+            function ($valor) use ($idLista) {
+                return $valor['id_lista'] == $idLista;
+            }
+        );
+        $lista['tareas'] = $tareas;
+        $lista['nota'] = $nota;
+        $title = "Ver Lista";
+        include_once '../assets/layouts/header.php';
+        include_once '../assets/components/ver-listas.php';
+        break;
     case "eliminarNota":
         if (!empty($listaTareas['nota'][$_GET['idNota']])) {
             unset($listaTareas['nota'][$_GET['idNota']]);
@@ -92,12 +118,12 @@ switch ($accion) {
         break;
     case "editarNota":
         $idNota = $_GET['idNota'] ?? null;
-        if(isset($listaTareas['nota'][$idNota])){
+        if (isset($listaTareas['nota'][$idNota])) {
             $archivoJson = $listaTareas;
             $title = "Editar nota";
             include_once '../assets/layouts/header.php';
             require_once "../assets/components/editar-nota.php";
-        }else{
+        } else {
             header(ERROR8);
         }
         break;
@@ -131,81 +157,16 @@ switch ($accion) {
         header((actualizarArchivoJson($listaTareas))
             ? MAIN : ERROR3);
         break;
-        case "descompletarTarea":
-            $listaTareas['tareas'][$_GET['idTarea']]['estado'] =
-                (isset($listaTareas['tareas'][$_GET['idTarea']]))
-                ? "no completado"
-                : $listaTareas['tareas'][$_GET['idTarea']]['estado'];
-            header((actualizarArchivoJson($listaTareas))
-                ? MAIN : ERROR3);
-            break;
+    case "descompletarTarea":
+        $listaTareas['tareas'][$_GET['idTarea']]['estado'] =
+            (isset($listaTareas['tareas'][$_GET['idTarea']]))
+            ? "no completado"
+            : $listaTareas['tareas'][$_GET['idTarea']]['estado'];
+        header((actualizarArchivoJson($listaTareas))
+            ? MAIN : ERROR3);
+        break;
     default:
         break;
-}
-
-//_-------------------------------------------------------------------//
-//_--------------------------- TAREAS ----------------------------------//
-//_-------------------------------------------------------------------//
-// CONTROL DE LA CREACIÓN DE LA TAREA JUNTO A LA VALIDACIÓN DEL DATO
-if (isset($_POST["crear-info-tarea"]) && !isset($_GET['error'])) {
-    $contieneInformacion = true;
-
-    $idListaTareas = $_POST['lista-de-tareas'] ?? 0;
-
-    $tarea = [
-        /** int */
-        "id" => count($listaTareas['tareas']),
-        /** string */
-        "descripcion" => $_POST['descripcion'],
-        /** enum */
-        "prioridad" => $_POST['prioridad'],
-        /** date */
-        "fecha-limite" => $_POST['fecha-limite'],
-        /** enum */
-        "estado" => $_POST['estado'],
-        /** int */
-        "id_lista" => $idListaTareas,
-    ];
-
-    foreach ($tarea as $clave => $valor) {
-        if (!isset($valor)) {
-            $contieneInformacion = false;
-        }
-    }
-
-    if ($contieneInformacion) {
-        array_push($listaTareas['tareas'], $tarea);
-        if (actualizarArchivoJson($listaTareas)) {
-            header(MAIN);
-        }
-    } else {
-        header(ERROR1);
-    }
-}
-
-// BLOQUE DE CÓDIGO QUE CONTROLA LA EDICIÓN DEL LA TAREA Y SUS ATRIBUTOS
-if (isset($_POST['change-info-tarea']) && !isset($_GET['error'])) {
-    $estaActualizado = false;
-    foreach ($listaTareas['tareas'] as $indiceTarea => $tarea) {
-        $tareas = $listaTareas['tareas'][$indiceTarea];
-        if ($_GET['idTarea'] == $indiceTarea) {
-
-            $tareas['descripcion'] = $_POST['descripcion'] ?? $tareas['descripcion'];
-            $tareas['prioridad'] = $_POST['prioridad'] ?? $tareas['prioridad'];
-            $tareas['fecha-limite'] = $_POST['fecha-limite'] ?? $tareas['fecha-limite'];
-            $tareas['estado'] = $_POST['estado'] ?? $tareas['estado'];
-            $tareas['id_lista'] = $_POST['lista-de-tareas'] ?? $tareas['id_lista'];
-
-            $listaTareas['tareas'][$indiceTarea] = $tareas;
-            $estaActualizado = true;
-        }
-    }
-
-    if (actualizarArchivoJson($listaTareas) && $estaActualizado) {
-        header(MAIN);
-    } else {
-        header(ERROR4);
-    }
 }
 
 //_-------------------------------------------------------------------//
@@ -310,12 +271,77 @@ if (isset($_POST["change-info-lista"]) && !isset($_GET['error'])) {
 }
 
 //_-------------------------------------------------------------------//
+//_--------------------------- TAREAS ----------------------------------//
+//_-------------------------------------------------------------------//
+// CONTROL DE LA CREACIÓN DE LA TAREA JUNTO A LA VALIDACIÓN DEL DATO
+if (isset($_POST["crear-info-tarea"]) && !isset($_GET['error'])) {
+    $contieneInformacion = true;
+
+    $idListaTareas = $_POST['lista-de-tareas'] ?? 0;
+
+    $tarea = [
+        /** int */
+        "id" => count($listaTareas['tareas']),
+        /** string */
+        "descripcion" => $_POST['descripcion'],
+        /** enum */
+        "prioridad" => $_POST['prioridad'],
+        /** date */
+        "fecha-limite" => $_POST['fecha-limite'],
+        /** enum */
+        "estado" => $_POST['estado'],
+        /** int */
+        "id_lista" => $idListaTareas,
+    ];
+
+    foreach ($tarea as $clave => $valor) {
+        if (!isset($valor)) {
+            $contieneInformacion = false;
+        }
+    }
+
+    if ($contieneInformacion) {
+        array_push($listaTareas['tareas'], $tarea);
+        if (actualizarArchivoJson($listaTareas)) {
+            header(MAIN);
+        }
+    } else {
+        header(ERROR1);
+    }
+}
+
+// BLOQUE DE CÓDIGO QUE CONTROLA LA EDICIÓN DEL LA TAREA Y SUS ATRIBUTOS
+if (isset($_POST['change-info-tarea']) && !isset($_GET['error'])) {
+    $estaActualizado = false;
+    foreach ($listaTareas['tareas'] as $indiceTarea => $tarea) {
+        $tareas = $listaTareas['tareas'][$indiceTarea];
+        if ($_GET['idTarea'] == $indiceTarea) {
+
+            $tareas['descripcion'] = $_POST['descripcion'] ?? $tareas['descripcion'];
+            $tareas['prioridad'] = $_POST['prioridad'] ?? $tareas['prioridad'];
+            $tareas['fecha-limite'] = $_POST['fecha-limite'] ?? $tareas['fecha-limite'];
+            $tareas['estado'] = $_POST['estado'] ?? $tareas['estado'];
+            $tareas['id_lista'] = $_POST['lista-de-tareas'] ?? $tareas['id_lista'];
+
+            $listaTareas['tareas'][$indiceTarea] = $tareas;
+            $estaActualizado = true;
+        }
+    }
+
+    if (actualizarArchivoJson($listaTareas) && $estaActualizado) {
+        header(MAIN);
+    } else {
+        header(ERROR4);
+    }
+}
+
+//_-------------------------------------------------------------------//
 //_--------------------------- NOTAS ----------------------------------//
 //_-------------------------------------------------------------------//
 // BLOQUE DE CÓDIGO QUE CONTROLA LA CREACIÓN DE UNA NOTA
-if(isset($_POST['crear-info-nota'])){
+if (isset($_POST['crear-info-nota'])) {
     $contieneInformacion = false;
-    
+
     $nota = [
         "id" => count($listaTareas['nota']),
         "titulo-nota" => $_POST['contenido-nota'] ?? "nota anónima",
@@ -339,29 +365,38 @@ if(isset($_POST['crear-info-nota'])){
 
 
 // BLOQUE DE CÓDIGO QUE CONTROLA LA EDICIÓN Y ACTUALIZACIÓN DE NOTAS
-if(isset($_POST['change-info-nota'])){
+if (isset($_POST['change-info-nota'])) {
     $idNota = $_GET['idNota'] ?? null;
     $estaActualizado = false;
-    if(count($listaTareas['nota'][$idNota]) > 0){
-        foreach($listaTareas['nota'] as $indiceNota => $nota){
-            if($idNota == $indiceNota){
-                $nota['titulo-nota'] = $_POST['titulo-nota'] ?? $nota['titulo-nota'];
-                $nota['color_nota'] = $_POST['color-nota'] ?? $nota['color_nota'];
-                $nota['descripcion'] = $_POST['contenido-nota'] ?? $nota['descripcion'];
-                $nota['id_lista'] = $_POST['lista-asociada'] ?? $nota['id_lista'];
+    
+    if (isset($listaTareas['nota'][$idNota])) {
+        foreach ($listaTareas['nota'] as $indiceNota => $nota) {
+            if ($idNota == $indiceNota) {
+                $nota['titulo-nota'] = (!empty($_POST['titulo-nota']))
+                ? $_POST['titulo-nota'] :$nota['titulo-nota'];
+                
+                $nota['color_nota'] = (!empty($_POST['color-nota']))
+                ? $_POST['color-nota'] : $nota['color_nota'];
+                
+                $nota['descripcion'] = (!empty($_POST['contenido-nota']))
+                ? $_POST['contenido-nota'] : $nota['descripcion'];
+                
+                $nota['id_lista'] = (!empty($_POST['lista-asociada']))
+                ? $_POST['lista-asociada'] : $nota['id_lista'];
+                
                 $estaActualizado = true;
+                
                 $listaTareas['nota'][$idNota] = $nota;
             }
         }
-        
-        if($estaActualizado){
+
+        if ($estaActualizado) {
             actualizarArchivoJson($listaTareas);
             header(NOTAS);
-        }else{
+        } else {
             header(ERROR7);
         }
-        
-    }else{
+    } else {
         header(ERROR8);
     }
 }

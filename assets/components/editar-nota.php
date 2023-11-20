@@ -13,17 +13,16 @@
                         value="<?php echo $archivoJson['nota'][$idNota]['titulo-nota']; ?>" maxlength="20">
                 </p>
                 <p>
-                    <label for="color-actual">Color Actual</label>
-                    <input type="text" name="color-actual"
-                        value="<?php echo $archivoJson['nota'][$idNota]['color_nota']; ?>" disabled>
-                </p>
-                <p>
                     <label for="color-nota">Selecciona un color</label>
-                    <input type="radio" name="color-nota" value="red">
-                    <input type="radio" name="color-nota" value="blue">
-                    <input type="radio" name="color-nota" value="green">
-                    <input type="radio" name="color-nota" value="yellow">
-                    <input type="radio" name="color-nota" value="orange">
+                    <select name="color-nota">
+                        <option value="" hidden selected><?php echo $archivoJson['nota'][$idNota]['color_nota']?>
+                        </option>
+                        <option value="darkred">Rojo</option>
+                        <option value="darkorange">Naranja</option>
+                        <option value="darkblue">Azúl</option>
+                        <option value="darkgreen">Verde</option>
+                        <option value="yellow">Amarillo</option>
+                    </select>
                 </p>
                 <p>
                     <label for="contenido-nota">Contenido de una nota</label>
@@ -31,15 +30,12 @@
                         placeholder="<?php echo $archivoJson['nota'][$idNota]['descripcion'] ?>"></textarea>
                 </p>
                 <p>
-                    <label for=" lista-ya-asociada">Lista asociada</label>
-                    <input type="text" name="lista-ya-asociada" value="<?php
-                                                                        $idLista = $archivoJson['nota'][$idNota]['id_lista'];
-                                                                        if (isset($archivoJson['lista'][$idLista])) {
-                                                                            echo $archivoJson['lista'][$idLista]['nombreLista'];
-                                                                        } else {
-                                                                            echo "Sin lista";
-                                                                        }
-                                                                        ?>" disabled>
+                    <label for="lista-ya-asociada">Lista asociada</label>
+                    <?php
+                    $idLista = $archivoJson['nota'][$idNota]['id_lista'];
+                    $nombreLista = $archivoJson['lista'][$idLista]['nombreLista'] ?? "Sin Lista";
+                    ?>
+                    <input type="text" name="lista-ya-asociada" value="<?php echo $nombreLista?>" disabled>
                 </p>
                 <p>
                     <label for="lista-asociada">¿Quieres asociar la nota a una lista?</label>
@@ -53,7 +49,7 @@
                     </select>
                 </p>
                 <p>
-                    <label for="change-info-nota">
+                    <label for=" change-info-nota">
                         <button type="submit" value="editar-nota" name="change-info-nota">Editar nota</button>
                     </label>
                 </p>

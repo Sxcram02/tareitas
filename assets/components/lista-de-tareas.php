@@ -32,7 +32,12 @@
             <button>
                 <a href="src/tareitas.php?accion=editarLista&idLista=<?php echo $idLista ?>">
                     <p>Editar</p>
-                    <i class="bx bx-check"></i>
+                    <i class='bx bx-pencil'></i>
+                </a>
+            </button>
+            <button>
+                <a href="src/tareitas.php?accion=verLista&idLista=<?php echo $idLista ?>">
+                    <i class="bx bx-search-alt-2"></i>
                 </a>
             </button>
         </p>

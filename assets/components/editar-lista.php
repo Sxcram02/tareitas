@@ -25,7 +25,8 @@ foreach ($archivoJson['lista'] as $lista) {
                 <legend>EDITAR LISTA</legend>
                 <p>
                     <label for="nombreLista">Nombre Lista: </label>
-                    <input type="text" name="nombreLista" value="<?php echo $archivoJson['lista'][$idLista]['nombreLista'] ?>" maxlength="20">
+                    <input type="text" name="nombreLista"
+                        value="<?php echo $archivoJson['lista'][$idLista]['nombreLista'] ?>" maxlength="20">
                 </p>
                 <p>
                     <label for="tareasAniadidas">¿Quieres añadir alguna tarea?</label>

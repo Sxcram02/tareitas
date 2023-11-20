@@ -10,11 +10,14 @@
                 </p>
                 <p>
                     <label for="color-nota">Selecciona un color</label>
-                    <input type="radio" name="color-nota" value="red">
-                    <input type="radio" name="color-nota" value="blue">
-                    <input type="radio" name="color-nota" value="green">
-                    <input type="radio" name="color-nota" value="yellow">
-                    <input type="radio" name="color-nota" value="orange">
+                    <select name="color-nota">
+                        <option value="" hidden selected>--Seleccionar--</option>
+                        <option value="darkred">Rojo</option>
+                        <option value="darkorange">Naranja</option>
+                        <option value="darkblue">Azúl</option>
+                        <option value="darkgreen">Verde</option>
+                        <option value="yellow">Amarillo</option>
+                    </select>
                 </p>
                 <p>
                     <label for="contenido-nota">Contenido de una nota</label>

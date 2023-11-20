@@ -1,4 +1,7 @@
-<?php $title = "Home"; include_once 'assets/layouts/header.php'; ?>
+<?php
+$title = "Home";
+include_once 'assets/layouts/header.php';
+?>
 <!-- MAIN CONTENT -->
 <!--
     TAREAS PENDIENTES:

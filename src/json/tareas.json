@@ -1,22 +1,5 @@
 {
-    "tareas": [
-        {
-            "id": 0,
-            "descripcion": "gewsgciewsg",
-            "prioridad": "muy importante",
-            "fecha-limite": "2023-03-12",
-            "estado": "no completado",
-            "id_lista": "2"
-        },
-        {
-            "id": 1,
-            "descripcion": "OUFHGVIERJIVFBERSJI",
-            "prioridad": "importante",
-            "fecha-limite": "2023-04-15",
-            "estado": "no completado",
-            "id_lista": "2"
-        }
-    ],
+    "tareas": [],
     "lista": {
         "0": {
             "id_lista": 0,
@@ -43,34 +26,13 @@
             "nombreLista": "LOCO"
         }
     },
-    "nota": {
-        "0": {
+    "nota": [
+        {
             "id": 4,
             "titulo-nota": "lfnweiusbfibsdvibsij",
             "descripcion": "alomejorno",
             "color_nota": "yellow",
             "id_lista": "2"
-        },
-        "2": {
-            "id": 2,
-            "titulo-nota": "TITULO 5",
-            "descripcion": "gerudfgehrsgdfiuwgsuic",
-            "color_nota": "darkgreen",
-            "id_lista": "5"
-        },
-        "3": {
-            "id": 3,
-            "titulo-nota": "TITULO 6",
-            "descripcion": "puedeser",
-            "color_nota": "blue",
-            "id_lista": "2"
-        },
-        "4": {
-            "id": 3,
-            "titulo-nota": "Esta es una buena nota",
-            "descripcion": "Esta es una buena nota",
-            "color_nota": "darkred",
-            "id_lista": "3"
         }
-    }
+    ]
 }

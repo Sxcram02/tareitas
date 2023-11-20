@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+
 /**
  * ACCIONES ESPECIFICADAS CONTROLADAS POR $_GET
  * POR METODO GET OBTENGO EL ID DE LA TAREA
@@ -36,126 +37,71 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
  */
 
 switch ($accion) {
+    
+    /**---------------------------------------------------------------------- */
+    /**-------------------------CREACIONES----------------------------------- */
+    /**---------------------------------------------------------------------- */
     case "crearNota":
-        $archivoJson = $listaTareas;
-        $title = "Crear nota";
-        include_once '../assets/layouts/header.php';
-        require_once "../assets/components/crear-nota.php";
+        mostrarVista($listaTareas, "Crear Nota","crear","nota");
         break;
     case "crearTarea":
-        $archivoJson = $listaTareas;
-        $title = "Crear tarea";
-        include_once '../assets/layouts/header.php';
-        require_once "../assets/components/crear-tarea.php";
+        mostrarVista($listaTareas, "Crear Tarea","crear","tarea");
         break;
     case "crearLista":
-        $archivoJson = $listaTareas;
-        $title = "Crear lista";
-        include_once '../assets/layouts/header.php';
-        require_once '../assets/components/crear-lista.php';
+        mostrarVista($listaTareas, "Crear Lista","crear","lista");
         break;
-
-    case "verLista":
-        $idLista = $_GET['idLista'] ?? null;
-        $lista = $listaTareas['lista'][$idLista] ?? null;
-        if (!isset($lista)) {
-            header(ERROR6);
-        }
-        $tareas = array_filter(
-            $listaTareas['tareas'],
-            function ($valor) use ($idLista) {
-                return $valor['id_lista'] == $idLista;
-            }
-        );
-
-        $nota = array_filter(
-            $listaTareas['nota'],
-            function ($valor) use ($idLista) {
-                return $valor['id_lista'] == $idLista;
-            }
-        );
-        $lista['tareas'] = $tareas;
-        $lista['nota'] = $nota;
-        $title = "Ver Lista";
-        include_once '../assets/layouts/header.php';
-        include_once '../assets/components/ver-listas.php';
-        break;
+            
+    /**---------------------------------------------------------------------- */
+    /**-------------------------ELIMINACIONES-------------------------------- */
+    /**---------------------------------------------------------------------- */
     case "eliminarTodas":
-        foreach($listaTareas['tareas'] as $indiceTarea => $tarea){
+        foreach ($listaTareas['tareas'] as $indiceTarea => $tarea) {
             unset($listaTareas['tareas'][$indiceTarea]);
             actualizarArchivoJson($listaTareas);
         }
         header(MAIN);
         break;
     case "eliminarNota":
-        if (!empty($listaTareas['nota'][$_GET['idNota']])) {
-            unset($listaTareas['nota'][$_GET['idNota']]);
-            actualizarArchivoJson($listaTareas);
-            header(NOTAS);
-        } else {
-            header(ERROR8);
-        }
+        $estaEliminado = eliminar($listaTareas, "nota", $_GET['idNota']);
+        header(($estaEliminado) ? NOTAS : ERROR8);
         break;
     case "eliminarTarea":
-        if (!empty($listaTareas['tareas'][$_GET['idTarea']])) {
-            unset($listaTareas['tareas'][$_GET['idTarea']]);
-            actualizarArchivoJson($listaTareas);
-            header(MAIN);
-        } else {
-            header(ERROR2);
-        }
+        $estaEliminado = eliminar($listaTareas, "tareas", $_GET['idTarea']);
+        header(($estaEliminado) ? MAIN : ERROR2);
         break;
     case "eliminarLista":
-        if (
-            !empty($listaTareas['lista'][$_GET['idLista']]) &&
-            $_GET['idLista'] != 0
-        ) {
-            foreach ($listaTareas['tareas'] as $indiceTarea => $tareas) {
-                if ($listaTareas['lista'][$_GET['idLista']]['id_lista'] == $tareas['id_lista']) {
-                    unset($listaTareas['tareas'][$indiceTarea]);
-                }
-            }
-
-            unset($listaTareas['lista'][$_GET['idLista']]);
-            actualizarArchivoJson($listaTareas);
-            header(LISTAS);
-        } else {
-            header(ERROR6);
+        $estaEliminado = false;
+        if (!empty($listaTareas['lista'][$_GET['idLista']]) && $_GET['idLista'] != 0) {
+            $estaEliminado = eliminar($listaTareas, "lista", $_GET['idLista']);
         }
+        header(($estaEliminado) ? LISTAS : ERROR6);
         break;
+        
+    /**------------------------------------------------------------------ */
+    /**-------------------------EDICIONES-------------------------------- */
+    /**------------------------------------------------------------------ */
     case "editarNota":
         $idNota = $_GET['idNota'] ?? null;
-        if (isset($listaTareas['nota'][$idNota])) {
-            $archivoJson = $listaTareas;
-            $title = "Editar nota";
-            include_once '../assets/layouts/header.php';
-            require_once "../assets/components/editar-nota.php";
-        } else {
-            header(ERROR8);
-        }
+        (isset($listaTareas['nota'][$idNota]))
+            ?mostrarVista($listaTareas,"Editar Nota","editar","nota")
+            :header(ERROR8);
         break;
     case 'editarLista':
         $idLista = $_GET['idLista'] ?? null;
-        if (isset($listaTareas["lista"][$idLista])) {
-            $archivoJson = $listaTareas;
-            $title = "Editar lista";
-            include_once '../assets/layouts/header.php';
-            require_once "../assets/components/editar-lista.php";
-        } else {
-            header(ERROR6);
-        }
+        (isset($listaTareas["lista"][$idLista]))
+            ?mostrarVista($listaTareas,"Editar Lista","editar","lista")
+            :header(ERROR6);
         break;
     case "editarTarea":
         $idTarea = $_GET['idListaTarea'] ?? null;
-        if (isset($listaTareas["tareas"][$_GET["idListaTarea"]])) {
-            $archivoJson = $listaTareas;
-            $title = "Editar tarea";
-            include_once '../assets/layouts/header.php';
-            require_once "../assets/components/editar-tarea.php";
-        } else {
-            header(ERROR2);
-        }
+        (isset($listaTareas["tareas"][$_GET["idListaTarea"]]))
+            ? mostrarVista($listaTareas,"Editar Tarea","editar","tareas")
+            : header(ERROR2);
         break;
+        
+    /**------------------------------------------------------------------ */
+    /**-------------------------SERVICIOS-------------------------------- */
+    /**------------------------------------------------------------------ */
     case "completarTarea":
         $listaTareas['tareas'][$_GET['idTarea']]['estado'] =
             (isset($listaTareas['tareas'][$_GET['idTarea']]))
@@ -174,11 +120,43 @@ switch ($accion) {
         break;
 
     case "completarTodas":
-        foreach($listaTareas['tareas'] as $indiceTarea => $tarea){
+        foreach ($listaTareas['tareas'] as $indiceTarea => $tarea) {
             $listaTareas['tareas'][$indiceTarea]['estado'] = "completado";
             actualizarArchivoJson($listaTareas);
         }
         header(MAIN);
+        break;
+
+        
+    /**---------------------------------------------------------------------- */
+    /**-------------------------VISUALIZACIONES------------------------------ */
+    /**---------------------------------------------------------------------- */
+    case "verLista":
+        $idLista = $_GET['idLista'] ?? null;
+        $lista = $listaTareas['lista'][$idLista] ?? null;
+        if (!isset($lista)) {
+            header(ERROR6);
+        }
+        
+        $tareas = array_filter(
+            $listaTareas['tareas'],
+            function ($valor) use ($idLista) {
+                return $valor['id_lista'] == $idLista;
+            }
+        );
+
+        $nota = array_filter(
+            $listaTareas['nota'],
+            function ($valor) use ($idLista) {
+                return $valor['id_lista'] == $idLista;
+            }
+        );
+        $lista['tareas'] = $tareas;
+        $lista['nota'] = $nota;
+        $title = "Ver Lista";
+
+        include_once '../assets/layouts/header.php';
+        include_once '../assets/components/ver-listas.php';
         break;
     default:
         break;
@@ -212,7 +190,6 @@ if (isset($_POST["crear-lista-de-tareas"]) && !isset($_GET['error'])) {
         header(ERROR5);
     }
 }
-
 
 // BLOQUE DE CÓDIGO QUE CONTROLA LA ACTUALIZACIÓN DE LISTA
 if (isset($_POST["change-info-lista"]) && !isset($_GET['error'])) {
@@ -284,6 +261,7 @@ if (isset($_POST["change-info-lista"]) && !isset($_GET['error'])) {
         header(ERROR7);
     }
 }
+
 
 //_-------------------------------------------------------------------//
 //_--------------------------- TAREAS ----------------------------------//
@@ -378,29 +356,28 @@ if (isset($_POST['crear-info-nota'])) {
     }
 }
 
-
 // BLOQUE DE CÓDIGO QUE CONTROLA LA EDICIÓN Y ACTUALIZACIÓN DE NOTAS
 if (isset($_POST['change-info-nota'])) {
     $idNota = $_GET['idNota'] ?? null;
     $estaActualizado = false;
-    
+
     if (isset($listaTareas['nota'][$idNota])) {
         foreach ($listaTareas['nota'] as $indiceNota => $nota) {
             if ($idNota == $indiceNota) {
                 $nota['titulo-nota'] = (!empty($_POST['titulo-nota']))
-                ? $_POST['titulo-nota'] :$nota['titulo-nota'];
-                
+                    ? $_POST['titulo-nota'] : $nota['titulo-nota'];
+
                 $nota['color_nota'] = (!empty($_POST['color-nota']))
-                ? $_POST['color-nota'] : $nota['color_nota'];
-                
+                    ? $_POST['color-nota'] : $nota['color_nota'];
+
                 $nota['descripcion'] = (!empty($_POST['contenido-nota']))
-                ? $_POST['contenido-nota'] : $nota['descripcion'];
-                
+                    ? $_POST['contenido-nota'] : $nota['descripcion'];
+
                 $nota['id_lista'] = (!empty($_POST['lista-asociada']))
-                ? $_POST['lista-asociada'] : $nota['id_lista'];
-                
+                    ? $_POST['lista-asociada'] : $nota['id_lista'];
+
                 $estaActualizado = true;
-                
+
                 $listaTareas['nota'][$idNota] = $nota;
             }
         }

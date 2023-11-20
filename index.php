@@ -5,12 +5,9 @@ include_once 'assets/layouts/header.php';
 <!-- MAIN CONTENT -->
 <!--
     TAREAS PENDIENTES:
-    1. RF 3.2 DE USABILIDAD E INTERACCIÓON
     2. ARREGLAR EXPRESIONES REGULARES.
     3. NO PERMITIR ESPACIOS VACÍOS.
     4. REFACTORIZAR CRUD.
-    5. Estilos tarjetas de notas
-    6. input radio del color
 -->
 <form action="src/tareitas.php" method="post">
     <!-- NAVBAR DE NAVEGACIÓN ENTRE TAREAS -->

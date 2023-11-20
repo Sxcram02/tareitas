@@ -62,6 +62,38 @@ function obtenerContenidoJson(string $archivoJson): ?array
     return (is_array($json) && !empty($json)) ? $json : null;
 }
 
+/**
+ * mostrarVista
+ *
+ * @param  mixed $listaTareas
+ * @param  mixed $titulo
+ * @param  mixed $vista
+ * @return void
+ */
+function mostrarVista(array $listaTareas,string $titulo,string $crud,string $vista):void {
+    $archivoJson = $listaTareas;
+    $title = $titulo;
+    include_once '../assets/layouts/header.php';
+    require_once "../assets/components/$crud-$vista.php";
+}
+
+/**
+ * eliminar
+ *
+ * @param  mixed $listaTareas
+ * @param  mixed $objeto
+ * @param  mixed $indiceObjeto
+ * @return bool
+ */
+function eliminar(array $listaTareas,string|int $objeto,string|int $indiceObjeto):bool {
+    if (!empty($listaTareas[$objeto][$indiceObjeto])) {
+        unset($listaTareas[$objeto][$indiceObjeto]);
+        actualizarArchivoJson($listaTareas);
+        return true;
+    } else {
+        return false;
+    }
+}
 
 /**
  * mostrarTareas

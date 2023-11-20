@@ -80,6 +80,13 @@ switch ($accion) {
         include_once '../assets/layouts/header.php';
         include_once '../assets/components/ver-listas.php';
         break;
+    case "eliminarTodas":
+        foreach($listaTareas['tareas'] as $indiceTarea => $tarea){
+            unset($listaTareas['tareas'][$indiceTarea]);
+            actualizarArchivoJson($listaTareas);
+        }
+        header(MAIN);
+        break;
     case "eliminarNota":
         if (!empty($listaTareas['nota'][$_GET['idNota']])) {
             unset($listaTareas['nota'][$_GET['idNota']]);
@@ -164,6 +171,14 @@ switch ($accion) {
             : $listaTareas['tareas'][$_GET['idTarea']]['estado'];
         header((actualizarArchivoJson($listaTareas))
             ? MAIN : ERROR3);
+        break;
+
+    case "completarTodas":
+        foreach($listaTareas['tareas'] as $indiceTarea => $tarea){
+            $listaTareas['tareas'][$indiceTarea]['estado'] = "completado";
+            actualizarArchivoJson($listaTareas);
+        }
+        header(MAIN);
         break;
     default:
         break;

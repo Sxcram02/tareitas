@@ -98,7 +98,42 @@
     justify-content: space-around;
 }
 
+.ver-lista {
+    overflow-y: scroll;
+}
+
+.ver-lista section {
+    height: 100%;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tareas-lista {
+    width: 50%;
+    background-color: var(--licorize);
+    border-radius: 5px;
+    padding: 2%;
+    margin: 2%;
+    text-transform: capitalize;
+    color:var(--xanthous);
+}
+
+.lista-nota {
+    width: 50%;
+    border-radius: 5px;
+    text-transform: capitalize;
+    margin: 2% 0% 0% 0%;
+    padding: 2%;
+}
+
 @media screen and (max-width:750px) {
+    .ver-lista {
+        flex-direction: column;
+    }
+
     .listas {
         width: 90%;
     }

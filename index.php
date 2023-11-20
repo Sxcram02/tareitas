@@ -27,13 +27,17 @@ include_once 'assets/layouts/header.php';
             <input type="search" name="buscador-tarea" id="buscador-tarea">
         </label>
         <label for="ordenar-desc">
-            <button type="submit" value="" name="ordenar-desc">
-                <i class='bx bxs-down-arrow' styles="font-size:36px;"></i>
+            <button>
+                <a href="src/tareitas.php?accion=completarTodas">
+                    <i class='bx bx-check' styles="font-size:36px;"></i>
+                </a>
             </button>
         </label>
         <label for="ordenar-asc">
-            <button type="submit" value="" name="ordenar-asc">
-                <i class='bx bxs-up-arrow' styles="font-size:36px;"></i>
+            <button>
+                <a href="src/tareitas.php?accion=eliminarTodas">
+                    <i class='bx bx-x' styles="font-size:36px;"></i>
+                </a>
             </button>
         </label>
         <label for="fecha-creacion">

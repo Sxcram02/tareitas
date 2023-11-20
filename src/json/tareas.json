@@ -1,46 +1,22 @@
 {
-    "tareas": {
-        "2": {
-            "id": 2,
-            "descripcion": "hola",
-            "prioridad": "no importante",
-            "fecha-limite": "2002-04-12",
-            "estado": "no completado",
-            "id_lista": "2"
-        },
-        "3": {
-            "id": 3,
-            "descripcion": "Tarea 1",
-            "prioridad": "intermedio",
-            "fecha-limite": "2023-04-12",
-            "estado": "completado",
-            "id_lista": "0"
-        },
-        "4": {
-            "id": 3,
-            "descripcion": "Tarea 12",
-            "prioridad": "importante",
-            "fecha-limite": "2025-12-12",
-            "estado": "no completado",
-            "id_lista": "2"
-        },
-        "5": {
-            "id": 4,
-            "descripcion": "Tarea 13",
-            "prioridad": "intermedio",
-            "fecha-limite": "2023-01-12",
-            "estado": "completado",
-            "id_lista": "3"
-        },
-        "6": {
-            "id": 5,
-            "descripcion": "Nueva Tarea",
+    "tareas": [
+        {
+            "id": 0,
+            "descripcion": "gewsgciewsg",
             "prioridad": "muy importante",
-            "fecha-limite": "2024-03-12",
+            "fecha-limite": "2023-03-12",
+            "estado": "no completado",
+            "id_lista": "2"
+        },
+        {
+            "id": 1,
+            "descripcion": "OUFHGVIERJIVFBERSJI",
+            "prioridad": "importante",
+            "fecha-limite": "2023-04-15",
             "estado": "no completado",
             "id_lista": "2"
         }
-    },
+    ],
     "lista": {
         "0": {
             "id_lista": 0,
@@ -88,6 +64,13 @@
             "descripcion": "puedeser",
             "color_nota": "blue",
             "id_lista": "2"
+        },
+        "4": {
+            "id": 3,
+            "titulo-nota": "Esta es una buena nota",
+            "descripcion": "Esta es una buena nota",
+            "color_nota": "darkred",
+            "id_lista": "3"
         }
     }
 }

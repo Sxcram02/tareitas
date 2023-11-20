@@ -87,7 +87,7 @@ function mostrarTareas(string $filtro = "no completado"): void
     } else {
         echo "<tr>
             <td colspan='5'>
-                <h1>NO TIENES NINGUNA LISTA " . strtoupper($filtro) . "</h1>
+                <h1>NO TIENES NINGUNA LISTA </h1>
             </td>
         </tr>";
     }

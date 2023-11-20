@@ -4,15 +4,13 @@ $tareas = $lista['tareas'] ?? array();
 $nota = $lista['nota'] ?? array();
 $colorNota = $nota[0]['color_nota'] ?? "white";
 ?>
-<article class="crud">
+<article class="crud ver-lista">
     <section>
         <h1><?php echo $nombreLista ?></h1>
-    </section>
-    <section>
         <?php
         if (!empty($tareas)) {
             foreach ($tareas as $clave => $tarea) {
-                echo "<div><ul>";
+                echo "<div class='tareas-lista'><ul>";
                 foreach ($tarea as $atributo => $valor) {
                     echo "<li>$atributo:  $valor</li>";
                 }
@@ -22,16 +20,17 @@ $colorNota = $nota[0]['color_nota'] ?? "white";
         ?>
     </section>
     <section>
-        <ul style="background-color: <?php echo $colorNota?>;">
-            <?php
+        <h1>NOTAS ASOCIADAS</h1>
+        <?php
             if (!empty($nota)) {
                 foreach ($nota as $atributo => $valor) {
+                    echo '<ul class="lista-nota" style="background-color:'.$colorNota.'">';
                     foreach($valor as $clave => $value){
-                        echo "<li>$clave:  $value</li>";
+                        echo "<li>$clave: $value</li>";
                     }
+                    echo "</ul>";
                 }
-            }
-            ?>
-        </ul>
+        }
+        ?>
     </section>
 </article>
